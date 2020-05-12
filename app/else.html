@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Else</title>
+</head>
+<style>
+
+</style>
+<body>
+<div id="content">...loading...</div>
+</body>
+<script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("Document ready! All DOM content loaded!");
+      });
+
+      setTimeout(function() {
+        header = document.createElement("H1");
+        header.setAttribute("id", "header");
+        header.innerText = "Header of else page";
+        document.getElementsByTagName("body")[0].prepend(header);
+        setTimeout(function() {
+            document.getElementById("content").innerText = "This is else page content.";
+        }, 3000);
+      }, 2800);
+
+</script>
+</html>

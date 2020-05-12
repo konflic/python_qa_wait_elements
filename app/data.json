@@ -1,0 +1,6 @@
+{
+  "tag": "BUTTON",
+  "classes": "btn btn-primary target",
+  "text": "I'm form JS!",
+  "display": "inline"
+}
