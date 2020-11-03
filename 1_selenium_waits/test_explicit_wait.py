@@ -4,10 +4,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_check_title(browser):
-    browser.get("http://0.0.0.0:8000/else.html")
+    browser.get("https://konflic.github.io/front_example/pages/slowlyloading.html")
     # Полная сигнатура метода WebdriverWait
-    wait = WebDriverWait(browser, 3)
-    wait.until(EC.title_is("Else"))
+    wait = WebDriverWait(browser, 10)
+    wait.until(EC.title_is("Loaded!"))
     wait.until(EC.visibility_of_element_located((By.ID, "header")), message='')
     el = wait.until(EC.visibility_of_element_located((By.ID, "content")))
     wait.until(EC.text_to_be_present_in_element((By.ID, "content"), "This is else page content."))
@@ -15,7 +15,7 @@ def test_check_title(browser):
 
 
 def test_check_magic_button(browser):
-    browser.get("http://0.0.0.0:8000/")
+    browser.get("https://konflic.github.io/front_example")
     button = browser.find_element_by_name("showjsbutton")
     button.click()
     js_button = WebDriverWait(browser, 3).until(EC.visibility_of_element_located((By.CLASS_NAME, "target")))

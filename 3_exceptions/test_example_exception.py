@@ -19,7 +19,6 @@ def wait_element(selector, driver, timeout=3):
 
 
 def test_check_exception(browser):
-    browser.get("http://0.0.0.0:8000")
-    wait_title("Example", browser)
+    browser.get("https://konflic.github.io/front_example/")
+    wait_title("Example Project", browser)
     wait_element("[name='disabled']", browser)
-    # А удобно ли передавать постоянно браузер?
