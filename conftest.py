@@ -17,8 +17,8 @@ def driver_factory(browser, driver_folder):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default="chrome")
-    parser.addoption("--drivers", default="/usr/local/games")
+    parser.addoption("--browser", default="chrome")
+    parser.addoption("--drivers", default="/usr/local/games", help="Папка где хранятся вебдрайверы")
 
 
 @pytest.fixture
@@ -26,5 +26,5 @@ def browser(request):
     driver = driver_factory(request.config.getoption("--browser"), request.config.getoption("--drivers"))
     driver.maximize_window()
     # driver.implicitly_wait(5)
-    request.addfinalizer(driver.close)
+    request.addfinalizer(driver.quit)
     return driver

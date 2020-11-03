@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def test_check_title(browser):
     browser.get("https://konflic.github.io/front_example/pages/slowlyloading.html")
     # Полная сигнатура метода WebdriverWait
-    wait = WebDriverWait(browser, 10)
+    wait = WebDriverWait(browser, 10, poll_frequency=1)
     wait.until(EC.title_is("Loaded!"))
     wait.until(EC.visibility_of_element_located((By.ID, "header")), message='')
     el = wait.until(EC.visibility_of_element_located((By.ID, "content")))
