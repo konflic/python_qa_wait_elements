@@ -2,13 +2,13 @@ import pytest
 from selenium import webdriver
 
 
-def driver_factory(browser, driver_folder):
+def driver_factory(browser):
     if browser == "chrome":
-        driver = webdriver.Chrome(executable_path=f"{driver_folder}/chromedriver")
+        driver = webdriver.Chrome()
     elif browser == "firefox":
-        driver = webdriver.Firefox(executable_path=f"{driver_folder}/geckodriver")
+        driver = webdriver.Firefox()
     elif browser == "opera":
-        driver = webdriver.Opera(executable_path=f"{driver_folder}/operadriver")
+        driver = webdriver.Opera()
     elif browser == "safari":
         driver = webdriver.Safari()
     else:
@@ -18,12 +18,11 @@ def driver_factory(browser, driver_folder):
 
 def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome")
-    parser.addoption("--drivers", default="/usr/local/games", help="Папка где хранятся вебдрайверы")
 
 
 @pytest.fixture
 def browser(request):
-    driver = driver_factory(request.config.getoption("--browser"), request.config.getoption("--drivers"))
+    driver = driver_factory(request.config.getoption("--browser"))
     driver.maximize_window()
     # driver.implicitly_wait(5)
     request.addfinalizer(driver.quit)
