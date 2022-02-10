@@ -23,6 +23,6 @@ def assert_element(selector, driver, timeout=1):
 
 
 def test_check_exception(browser):
-    browser.get("https://konflic.github.io/front_example/")
+    browser.get("https://konflic.github.io/examples/")
     wait_title("Example Project", browser)
     assert_element("[name='disable']", browser)

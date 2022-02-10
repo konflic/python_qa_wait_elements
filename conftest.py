@@ -1,10 +1,16 @@
 import pytest
+import os
+
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+
+DRIVERS = os.path.expanduser("~/Downloads/drivers")
 
 
 def driver_factory(browser):
     if browser == "chrome":
-        driver = webdriver.Chrome()
+        service = Service(executable_path=os.path.join(DRIVERS, "chromedriver"))
+        driver = webdriver.Chrome(service=service)
     elif browser == "firefox":
         driver = webdriver.Firefox()
     elif browser == "opera":

@@ -24,7 +24,7 @@ class amount_of_elements_with_class_name:
             return False
 
 
-AJAX_EXAMPLE = "https://konflic.github.io/front_example/pages/ajax.html"
+AJAX_EXAMPLE = "https://konflic.github.io/examples/pages/ajax.html"
 
 
 def test_using_lambda(browser):

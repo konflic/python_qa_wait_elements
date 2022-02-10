@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_check_title(browser):
-    browser.get("https://konflic.github.io/front_example/pages/slowlyloading.html")
+    browser.get("https://konflic.github.io/examples/pages/slowlyloading.html")
     # Можно создать экземляр класса
     wait = WebDriverWait(browser, 10, poll_frequency=1)
     # И потом использовать ожидания от него
@@ -16,7 +16,7 @@ def test_check_title(browser):
 
 
 def test_check_magic_button(browser):
-    browser.get("https://konflic.github.io/front_example/pages/ajax.html")
+    browser.get("https://konflic.github.io/examples/pages/ajax.html")
     # Так как этот элемент не асинхронный, то можно не использовать ожиданий он загрузится вместо со страницей
     browser.find_element_by_name("showjsbutton").click()
     # Если метод возвращает элемент который ищет можно взять его ссылку
