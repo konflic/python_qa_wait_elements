@@ -4,12 +4,18 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-DRIVERS = os.path.expanduser("~/Downloads/drivers")
+def pytest_addoption(parser):
+    parser.addoption("--browser", default="chrome")
+    parser.addoption("--drivers", default=os.path.expanduser("~/Downloads/drivers"))
 
 
-def driver_factory(browser):
+@pytest.fixture
+def browser(request):
+    browser = request.config.getoption("--browser")
+    drivers = request.config.getoption("--drivers")
+
     if browser == "chrome":
-        service = Service(executable_path=os.path.join(DRIVERS, "chromedriver"))
+        service = Service(executable_path=os.path.join(drivers, "chromedriver"))
         driver = webdriver.Chrome(service=service)
     elif browser == "firefox":
         driver = webdriver.Firefox()
@@ -19,17 +25,7 @@ def driver_factory(browser):
         driver = webdriver.Safari()
     else:
         raise Exception("Driver not supported")
-    return driver
 
-
-def pytest_addoption(parser):
-    parser.addoption("--browser", default="chrome")
-
-
-@pytest.fixture
-def browser(request):
-    driver = driver_factory(request.config.getoption("--browser"))
-    driver.maximize_window()
-    # driver.implicitly_wait(5)
     request.addfinalizer(driver.quit)
+
     return driver

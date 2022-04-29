@@ -12,17 +12,15 @@ def wait_title(title, driver, timeout=3):
         raise AssertionError("Ждал что title будет: '{}' но он был '{}'".format(title, driver.title))
 
 
-def assert_element(selector, driver, timeout=1):
+def assert_element(selector, driver, timeout=1, by=By.CSS_SELECTOR):
     try:
-        WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.CSS_SELECTOR, selector)))
+        return WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((by, selector)))
     except TimeoutException:
-        # Перехватываем исключение и атачим скриншот
         driver.save_screenshot("{}.png".format(driver.session_id))
-        # Выбрасываем AssertionError
         raise AssertionError("Не дождался видимости элемента: {}".format(selector))
 
 
 def test_check_exception(browser):
     browser.get("https://konflic.github.io/examples/")
-    wait_title("Example Project", browser)
-    assert_element("[name='disable']", browser)
+    wait_title("Example", browser)
+    element = assert_element("[name='disable']", browser)
