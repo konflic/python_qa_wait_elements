@@ -17,10 +17,13 @@ def browser(request):
     if browser == "chrome":
         service = Service(executable_path=os.path.join(drivers, "chromedriver"))
         driver = webdriver.Chrome(service=service)
+    elif browser == "yandex":
+        options = webdriver.ChromeOptions()
+        service = Service(executable_path=os.path.join(drivers, "yandexdriver"))
+        options.binary_location = "/usr/bin/yandex-browser"
+        driver = webdriver.Chrome(service=service, options=options)
     elif browser == "firefox":
-        driver = webdriver.Firefox()
-    elif browser == "opera":
-        driver = webdriver.Opera()
+        driver = webdriver.Firefox(executable_path=os.path.join(drivers, "geckodriver"))
     elif browser == "safari":
         driver = webdriver.Safari()
     else:
