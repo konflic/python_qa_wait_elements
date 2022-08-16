@@ -5,31 +5,22 @@ from selenium.webdriver.common.by import By
 
 
 def amount_of_elements(selector, amount):
-
     def __predicate(driver):
-        # Безопасно ищу все элементы на странице
-        elements = driver.find_elements(By.CSS_SELECTOR, selector)
-        # Если количество элементов сопало с ожидаемым
-        if len(elements) == amount:
-            # Если ждали количества элементов 0,
-            # То вернуть True так как условие выполнено, а 0 будет воспринят как False
-            if len(elements) == 0: return True
-            # Возвращаю все элементы, либо один
-            return elements if amount > 1 else elements[0]
-        else:
-            # Если кол-во элементов не равно ожидаемому возвращаю False
-            return False
+
+        elements = driver.find_elements(By.CSS_SELECTOR, selector) # Безопасно ищу все элементы на странице
+
+        if len(elements) == amount: # Если количество элементов совпало с ожидаемым
+            if amount == 0:
+                return True # Если ждали количества элементов 0, То вернуть True так как условие выполнено, а 0 будет воспринят как False
+
+            return elements if amount > 1 else elements[0] # Возвращаю все элементы, либо один если искали 1
+
+        return False
 
     return __predicate
 
+
 AJAX_EXAMPLE = "https://konflic.github.io/examples/pages/ajax.html"
-
-
-def test_using_lambda(browser):
-    # Можно использовать функцию или lambda выражение
-    browser.get(AJAX_EXAMPLE)
-    el = WebDriverWait(browser, 2).until(lambda driver: driver.find_element_by_name("showjsbutton"))
-    assert el.text == "Ajax Request"
 
 
 def test_custom_wait(browser):
