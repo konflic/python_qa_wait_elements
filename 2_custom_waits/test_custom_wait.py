@@ -25,7 +25,7 @@ AJAX_EXAMPLE = "https://konflic.github.io/examples/pages/ajax.html"
 
 def test_custom_wait(browser):
     browser.get(AJAX_EXAMPLE)
-    button = browser.find_element_by_name("showjsbutton")
+    button = browser.find_element(By.NAME, "showjsbutton")
     # Берем случайное количество действий для теста
     test_amount = random.randint(3, 8)
     # Делаем клики в установленном выше количестве

@@ -15,7 +15,7 @@ def browser(request):
     drivers = request.config.getoption("--drivers")
 
     if browser == "chrome":
-        service = Service(executable_path=os.path.join(drivers, "chromedriver"))
+        service = Service()
         driver = webdriver.Chrome(service=service)
     elif browser == "yandex":
         options = webdriver.ChromeOptions()
@@ -23,9 +23,7 @@ def browser(request):
         options.binary_location = "/usr/bin/yandex-browser"
         driver = webdriver.Chrome(service=service, options=options)
     elif browser == "firefox":
-        driver = webdriver.Firefox(executable_path=os.path.join(drivers, "geckodriver"))
-    elif browser == "safari":
-        driver = webdriver.Safari()
+        driver = webdriver.Firefox()
     else:
         raise Exception("Driver not supported")
 
