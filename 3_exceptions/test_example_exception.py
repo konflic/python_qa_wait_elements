@@ -23,4 +23,4 @@ def assert_element(selector, driver, timeout=1, by=By.CSS_SELECTOR):
 def test_check_exception(browser):
     browser.get("https://konflic.github.io/examples/")
     wait_title("Example", browser)
-    element = assert_element("[name='disable']", browser)
+    assert_element("[name='disable']", browser)

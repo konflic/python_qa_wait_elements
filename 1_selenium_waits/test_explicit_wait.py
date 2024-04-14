@@ -18,7 +18,7 @@ def test_check_title(browser):
 def test_check_magic_button(browser):
     browser.get("https://konflic.github.io/examples/pages/ajax.html")
     # Так как этот элемент не асинхронный, то можно не использовать ожиданий он загрузится вместо со страницей
-    browser.find_element_by_name("showjsbutton").click()
+    browser.find_element(By.NAME, "showjsbutton").click()
     # Если метод возвращает элемент который ищет можно взять его ссылку
     js_button = WebDriverWait(browser, 3).until(EC.visibility_of_element_located((By.CLASS_NAME, "target")))
     js_button.click()
