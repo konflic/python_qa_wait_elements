@@ -29,4 +29,6 @@ def browser(request):
 
     request.addfinalizer(driver.quit)
 
+    driver.implicitly_wait(2)
+
     return driver
